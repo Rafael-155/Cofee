@@ -10,5 +10,5 @@ public class ApplicationDbContext : IdentityDbContext
         }
     public DbSet<Cofee.Models.Contacto> DataContacto {get; set; }
     
-    
+    public DbSet<Cofee.Models.Producto> DataProducto {get; set; }
 }
