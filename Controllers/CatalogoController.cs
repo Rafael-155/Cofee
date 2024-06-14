@@ -49,11 +49,21 @@ namespace Cofee.Controllers
                 ViewData["Message"] = "Por favor inicie sesión antes de agregar un producto";
                 List<Producto> productos = new List<Producto>();
                 return  View("Index",productos);
-            } else {
+            }else{
                 var producto = await _context.DataProducto.FindAsync(id);
+                Util.SessionExtension.Set<Producto>(HttpContext.Session,"Mi Ultimo Producto", producto);
+                Proforma proforma = new Proforma();
+                proforma.Producto = producto;
+                proforma.Precio = producto.Price;
+                proforma.Cantidad = 1;
+                proforma.UserID = userID;
+                _context.Add(proforma);
+                await _context.SaveChangesAsync();
+                ViewData["Message"] = "Se Agrego al carrito";
                 return RedirectToAction(nameof(Index));
             }
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
