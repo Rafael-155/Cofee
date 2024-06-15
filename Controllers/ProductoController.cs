@@ -7,22 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cofee.Data;
 using Cofee.Models;
+using Cofee.Service;
 
 namespace Cofee.Controllers
 {
     public class ProductoController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ProductoService _productoService;
 
-        public ProductoController(ApplicationDbContext context)
+        public ProductoController(ApplicationDbContext context,ProductoService productoService)
         {
             _context = context;
+             _productoService = productoService;
         }
 
         // GET: Producto
         public async Task<IActionResult> Index()
         {
-            return View(await _context.DataProducto.ToListAsync());
+            var productos = await _productoService.GetAll();
+            return productos != null ?
+                        View(productos) :
+                        Problem("Entity set 'ApplicationDbContext.DataProductos'  is null.");
         }
 
         // GET: Producto/Details/5
@@ -54,7 +60,7 @@ namespace Cofee.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Status,ImageURL")] Producto producto)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Status,Description,ImageURL")] Producto producto)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +92,7 @@ namespace Cofee.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Status,ImageURL")] Producto producto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Status,Description,ImageURL")] Producto producto)
         {
             if (id != producto.Id)
             {
