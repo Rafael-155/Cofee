@@ -13,4 +13,8 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<Cofee.Models.Producto> DataProducto {get; set; }
     public DbSet<Cofee.Models.Proforma> DataItemCarrito {get; set; }
+    public DbSet<Cofee.Models.Pago> DataPago {get; set; }
+    public DbSet<Cofee.Models.Pedido> DataPedido {get; set; }
+    public DbSet<Cofee.Models.DetallePedido> DataDetallePedido {get; set; }
+
 }
