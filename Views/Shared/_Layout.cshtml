@@ -25,28 +25,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Contacto" asp-action="Index">Contactame</a>
                         </li>
-
-                            <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Catalogo" asp-action="Index">Catalogo</a>
                         </li> 
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Carrito" asp-action="Index">Carrito</a>
-                        </li>
-
-
-                        <li class="nav-item">
-                            <form asp-controller="Catalogo" asp-action="Index">
-                                <input type="text" name="searchString"><input type="submit" value="Buscar" />
-                            </form>
-                        </li>
-                         
-                            
-                        
+                    </li>
+                        <partial name="_MenuAdminPartial" />
+                    </ul>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
